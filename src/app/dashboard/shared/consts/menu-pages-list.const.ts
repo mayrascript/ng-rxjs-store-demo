@@ -8,7 +8,7 @@ export const menuPageList = [
     childrenPaths: [
       {
         title: 'Create',
-        path: 'courses'
+        path: 'courses/create'
       },
       {
         title: 'List',

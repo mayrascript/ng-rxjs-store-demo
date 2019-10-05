@@ -12,15 +12,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'course-form',
+        redirectTo: 'create',
         pathMatch: 'full'
       },
       {
-        path: 'course-form',
+        path: 'create',
         component: CourseFormComponent
       },
       {
-        path: 'course-form/:id',
+        path: 'edit/:id',
         component: CourseFormComponent
       },
       {

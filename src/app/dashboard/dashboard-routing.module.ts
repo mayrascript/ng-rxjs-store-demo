@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: 'courses',
-        loadChildren: 'src/app/dashboard/courses/courses.module#CoursesModule'
+        loadChildren: () => import(`./courses/courses.module`).then(m => m.CoursesModule)
       }
     ]
   }

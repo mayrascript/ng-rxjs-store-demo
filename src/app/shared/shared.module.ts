@@ -1,16 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatExpansionModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatButtonModule, MatDatepickerModule,
+  MatExpansionModule, MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatListModule, MatNativeDateModule,
+  MatSidenavModule, MatSlideToggleModule,
+  MatStepperModule,
+  MatToolbarModule
+} from '@angular/material';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 const sharedModules = [
+  ReactiveFormsModule,
   MatToolbarModule,
   MatIconModule,
   MatToolbarModule,
   MatSidenavModule,
   MatExpansionModule,
   MatListModule,
-  MatButtonModule
+  MatButtonModule,
+  MatStepperModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSlideToggleModule
 ];
 
 
