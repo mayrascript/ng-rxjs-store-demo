@@ -31,7 +31,6 @@ export class CoursesListComponent implements OnInit {
   }
 
   showDetails(id: number) {
-    console.log('showDetails');
     this.router.navigate(['courses/course-details', id]);
   }
 
