@@ -1,0 +1,55 @@
+<div class="header" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+
+    <div class="title">
+      <a routerLink="">
+        <h1>{{ mainTitle }}</h1>
+        <span>{{ subTitle }}</span>
+      </a>
+    </div>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+    <a *ngIf="!userName" mat-icon-button routerLink="/auth"><mat-icon>person</mat-icon></a>
+    <div *ngIf="userName">
+      <span>Hola! {{ userName }}</span>
+      <button (click)="signOut()" mat-button>Cerrar Sesión</button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidebav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches"
+                 fixedTopGap="56">
+      <mat-nav-list>
+        <div *ngFor="let p of pageList">
+          <a (click)="updateTitlePage(p.title)" *ngIf="p.path || p.path == ''" mat-list-item routerLinkActive="active"
+             [routerLink]="p.path">{{ p.title }}</a>
+          <mat-accordion *ngIf="p.childrenPaths">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ p.title }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <a (click)="updateTitlePage(p.title, childrenP.title)" mat-list-item routerLinkActive="active"
+                 [routerLink]="childrenP.path" *ngFor="let childrenP of p.childrenPaths">{{ childrenP.title }}</a>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <h2 class="no-print">{{ linkTitle }}</h2>
+      <h3 class="no-print">{{ subLinkTitle }}</h3>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
