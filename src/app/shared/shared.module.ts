@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
-  MatButtonModule, MatDatepickerModule,
+  MatButtonModule, MatCardModule, MatDatepickerModule,
   MatExpansionModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatNativeDateModule,
@@ -26,7 +26,8 @@ const sharedModules = [
   MatFormFieldModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatCardModule
 ];
 
 

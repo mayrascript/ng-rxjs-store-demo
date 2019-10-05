@@ -1,35 +1,66 @@
-Please review the course Information.
+<mat-card>
+  <mat-card-title>
+    Module Creation
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="moduleForm">
+      <mat-form-field>
+        <input matInput placeholder="Module Title" formControlName="title" required>
+      </mat-form-field>
 
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="desc" required>
+      </mat-form-field>
+
+      <h3>Themes</h3>
+
+      <div formGroupName="themes" class="full-width">
+        <mat-form-field>
+          <input matInput placeholder="Theme title" formControlName="title" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Theme description" formControlName="desc" required>
+        </mat-form-field>
+
+        <div>
+          <button mat-button (click)="addThemeToModule()">Add Theme</button>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+<!--/Modules/-->
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let module of modules; let index = index;">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Personal data
+        {{index + 1}} -
+        {{module.title}}
       </mat-panel-title>
       <mat-panel-description>
-        Type your name and age
+        {{module.desc}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
+    <!--/Themes/-->
 
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
-  </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let theme of module.themes; let themeIndex = index;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{themeIndex + 1}} -
+            {{theme.title}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{theme.desc}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-expansion-panel>
 </mat-accordion>
 
