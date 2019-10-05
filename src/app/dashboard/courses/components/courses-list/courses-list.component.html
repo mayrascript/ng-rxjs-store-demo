@@ -1,1 +1,15 @@
-<p>courses-list works!</p>
+<div class="courses-list">
+  <mat-card *ngFor="let course of courses">
+    <mat-card-title>
+      {{course.title}}
+    </mat-card-title>
+    <mat-card-content>
+      {{course.desc}}
+    </mat-card-content>
+    <mat-card-footer>
+      <button (click)="showDetails(course.id)" mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-icon>visibility</mat-icon>
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

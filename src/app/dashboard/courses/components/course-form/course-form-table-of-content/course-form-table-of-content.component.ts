@@ -1,19 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModuleModel } from 'src/app/dashboard/shared/models/module.model';
+import { ThemeModel } from 'src/app/dashboard/shared/models/theme.model';
 
-interface ModuleModel {
-  title: string;
-  desc?: string;
-  number?: number;
-  themes?: ThemeModel[];
-}
-
-interface ThemeModel {
-  number?: number;
-  title: string;
-  desc: string;
-  teacherNotes: string;
-}
 @Component({
   selector: 'app-course-form-table-of-content',
   templateUrl: './course-form-table-of-content.component.html',
