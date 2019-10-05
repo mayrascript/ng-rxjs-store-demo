@@ -17,7 +17,8 @@ export class CourseFormBasicInfoComponent implements OnInit {
 
   buildForm() {
     this.basicInfoForm = this.fb.group({
-      title: ['', Validators.required]
+      title: ['', Validators.required],
+      desc: ['']
     });
   }
 

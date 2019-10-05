@@ -12,6 +12,7 @@ interface ThemeModel {
   number?: number;
   title: string;
   desc: string;
+  teacherNotes: string;
 }
 @Component({
   selector: 'app-course-form-table-of-content',
@@ -36,16 +37,17 @@ export class CourseFormTableOfContentComponent implements OnInit {
       title: ['', Validators.required],
       desc: [''],
       themes: this.fb.group({
-        title: [''],
+        title: ['', Validators.required],
         desc: [''],
+        teacherNotes: ['']
       })
     });
   }
 
   addThemeToModule() {
     const module = this.getModuleInfo();
-    const {title, desc} = this.moduleForm.controls.themes.value;
-    this.addModule(module, {title, desc});
+    const {title, desc, teacherNotes} = this.moduleForm.controls.themes.value;
+    this.addModule(module, {title, desc, teacherNotes});
     this.resetThemeForm();
   }
 

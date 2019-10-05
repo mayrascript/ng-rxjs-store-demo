@@ -9,7 +9,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Description" formControlName="desc" required>
+        <input matInput placeholder="Description" formControlName="desc">
       </mat-form-field>
 
       <h3>Themes</h3>
@@ -20,7 +20,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Theme description" formControlName="desc" required>
+          <input matInput placeholder="Theme description" formControlName="desc">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Teacher notes" formControlName="teacherNotes">
         </mat-form-field>
 
         <div>
@@ -52,13 +56,15 @@
       <mat-expansion-panel *ngFor="let theme of module.themes; let themeIndex = index;">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{themeIndex + 1}} -
+            {{index + 1}}.{{themeIndex + 1}} -
             {{theme.title}}
           </mat-panel-title>
-          <mat-panel-description>
-            {{theme.desc}}
-          </mat-panel-description>
         </mat-expansion-panel-header>
+          <h4>Description</h4>
+          <p>{{theme.desc}}</p>
+  
+          <h4>Teacher Notes</h4>
+          <p>{{theme.teacherNotes}}</p>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-expansion-panel>
