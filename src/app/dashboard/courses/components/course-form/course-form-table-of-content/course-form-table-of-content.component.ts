@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CourseStoreService } from 'src/app/dashboard/services/store/course-store.service';
+import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 import { ModuleModel } from 'src/app/dashboard/shared/models/module.model';
 import { ThemeModel } from 'src/app/dashboard/shared/models/theme.model';
 
@@ -10,12 +12,14 @@ import { ThemeModel } from 'src/app/dashboard/shared/models/theme.model';
 })
 export class CourseFormTableOfContentComponent implements OnInit {
   @Input() stepper: any;
+  @Input() currentCourse: CourseModel;
 
   moduleForm: FormGroup;
   panelOpenState = false;
   modules: ModuleModel[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private courseStoreService: CourseStoreService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -49,6 +53,8 @@ export class CourseFormTableOfContentComponent implements OnInit {
       module.themes = [theme];
       this.modules.push(module);
     }
+
+    this.updateCourse();
   }
 
   private getModuleInfo(): ModuleModel {
@@ -58,6 +64,11 @@ export class CourseFormTableOfContentComponent implements OnInit {
 
   private resetThemeForm() {
     this.moduleForm.controls.themes.reset();
+  }
+
+  private updateCourse() {
+    this.currentCourse = {...this.currentCourse, modules: this.modules};
+    this.courseStoreService.updateCourse(this.currentCourse);
   }
 
 }

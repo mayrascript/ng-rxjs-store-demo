@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 
 @Component({
   selector: 'app-course-form-confirm',
@@ -7,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CourseFormConfirmComponent implements OnInit {
   @Input() stepper: any;
+  @Input() currentCourse: CourseModel;
 
   constructor() { }
 

@@ -2,21 +2,22 @@
 
   <mat-step [stepControl]="basicInfoForm">
     <ng-template matStepLabel>Basic Information</ng-template>
-    <app-course-form-basic-info></app-course-form-basic-info>
+    <app-course-form-basic-info (courseCreated)="onCourseCreated($event)"></app-course-form-basic-info>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Table of Contents</ng-template>
-    <app-course-form-table-of-content [stepper]="stepper"></app-course-form-table-of-content>
+    <app-course-form-table-of-content [stepper]="stepper"
+                                      [currentCourse]="currentCourse"></app-course-form-table-of-content>
   </mat-step>
 
   <mat-step [stepControl]="publishingInfo">
     <ng-template matStepLabel>Publishing Info</ng-template>
-    <app-course-form-publishing-info></app-course-form-publishing-info>
+    <app-course-form-publishing-info [currentCourse]="currentCourse"></app-course-form-publishing-info>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Confirm creation</ng-template>
-    <app-course-form-confirm [stepper]="stepper"></app-course-form-confirm>
+    <app-course-form-confirm [stepper]="stepper" [currentCourse]="currentCourse"></app-course-form-confirm>
   </mat-step>
 </mat-horizontal-stepper>

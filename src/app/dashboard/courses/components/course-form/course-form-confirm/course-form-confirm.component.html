@@ -1,5 +1,12 @@
 
-Please review the course Information.
+<h2>Please review the course Information.</h2>
+
+<h3>Title {{currentCourse?.title}}</h3>
+<h3>Description {{currentCourse?.desc}}</h3>
+<h3>Publication Date {{currentCourse?.publicationDate | date}}</h3>
+<h3>Published {{currentCourse?.isPublished}}</h3>
+
+
 <div>
   <button mat-button matStepperPrevious>Back</button>
   <button mat-button (click)="stepper.reset()">Reset</button>
