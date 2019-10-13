@@ -1,0 +1,76 @@
+<mat-card>
+  <mat-card-title>
+    Module Creation
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="moduleForm">
+      <mat-form-field>
+        <input matInput placeholder="Module Title" formControlName="title" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="desc">
+      </mat-form-field>
+
+      <h3>Themes</h3>
+
+      <div formGroupName="themes" class="full-width">
+        <mat-form-field>
+          <input matInput placeholder="Theme title" formControlName="title" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Theme description" formControlName="desc">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Teacher notes" formControlName="teacherNotes">
+        </mat-form-field>
+
+        <div>
+          <button mat-button (click)="addThemeToModule()">Add Theme</button>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+<!--/Modules/-->
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let module of modules; let index = index;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{index + 1}} -
+        {{module.title}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{module.desc}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!--/Themes/-->
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let theme of module.themes; let themeIndex = index;">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{index + 1}}.{{themeIndex + 1}} -
+            {{theme.title}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+          <h4>Description</h4>
+          <p>{{theme.desc}}</p>
+
+          <h4>Teacher Notes</h4>
+          <p>{{theme.teacherNotes}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div>
+  <button mat-button matStepperPrevious>Back</button>
+  <button mat-button (click)="stepper.reset()">Reset</button>
+</div>
