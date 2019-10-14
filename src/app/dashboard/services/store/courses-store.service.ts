@@ -5,20 +5,11 @@ import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CourseStoreService {
+export class CoursesStoreService {
 
   private readonly _courses = new BehaviorSubject<CourseModel[]>([]);
 
   readonly courses$ = this._courses.asObservable();
-  currentCourse: CourseModel;
-
-  get courses(): CourseModel[] {
-    return this._courses.getValue();
-  }
-
-  private set courses(val: CourseModel[]) {
-    this._courses.next(val);
-  }
 
   addCourse(course: CourseModel) {
     // with automatically assigned ID ( don't do this at home, use uuid() )
@@ -42,12 +33,15 @@ export class CourseStoreService {
     console.log(this.courses);
   }
 
-  // TODO: create an action for this
-  saveCurrentCourse(course: CourseModel) {
-    this.currentCourse = course;
-  }
-
   removeCourse(id: number) {
     this.courses = this.courses.filter(course => course.id !== id);
+  }
+
+  private get courses(): CourseModel[] {
+    return this._courses.getValue();
+  }
+
+  private set courses(val: CourseModel[]) {
+    this._courses.next(val);
   }
 }

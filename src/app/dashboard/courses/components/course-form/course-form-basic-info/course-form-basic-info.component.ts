@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CourseStoreService } from 'src/app/dashboard/services/store/course-store.service';
-import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
+import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
 
 @Component({
   selector: 'app-course-form-basic-info',
@@ -12,7 +11,7 @@ export class CourseFormBasicInfoComponent implements OnInit {
   basicInfoForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private courseStoreService: CourseStoreService) { }
+              private coursesStoreService: CoursesStoreService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -28,7 +27,7 @@ export class CourseFormBasicInfoComponent implements OnInit {
   createCourse() {
     const {title, desc} = this.basicInfoForm.value;
     const course = {title, desc};
-    const courseCreated = this.courseStoreService.addCourse(course);
+    const courseCreated = this.coursesStoreService.addCourse(course);
     // TODO: update views.
   }
 

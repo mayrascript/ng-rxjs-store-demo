@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CourseStoreService } from 'src/app/dashboard/services/store/course-store.service';
+import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 import { ModuleModel } from 'src/app/dashboard/shared/models/module.model';
 import { ThemeModel } from 'src/app/dashboard/shared/models/theme.model';
@@ -19,7 +19,7 @@ export class CourseFormTableOfContentComponent implements OnInit {
   modules: ModuleModel[] = [];
 
   constructor(private fb: FormBuilder,
-              private courseStoreService: CourseStoreService) { }
+              private courseStoreService: CoursesStoreService) { }
 
   ngOnInit() {
     this.buildForm();
