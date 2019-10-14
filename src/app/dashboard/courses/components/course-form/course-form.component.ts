@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { CurrentCourseStoreService } from 'src/app/dashboard/services/store/current-course-store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 
 @Component({
@@ -9,15 +11,19 @@ import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 })
 export class CourseFormComponent implements OnInit {
   isLinear = false;
-  currentCourse: CourseModel;
+  currentCourse$: Observable<CourseModel>;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private currentCourseService: CurrentCourseStoreService
+  ) {}
 
   ngOnInit() {
   }
 
-  onCourseCreated(newCourse: CourseModel) {
-    this.currentCourse = newCourse;
+  onCourseCreated(newCourse: boolean) {
+    if (newCourse) {
+      this.currentCourse$ = this.currentCourseService.currentCourse$;
+    }
   }
 
 }
