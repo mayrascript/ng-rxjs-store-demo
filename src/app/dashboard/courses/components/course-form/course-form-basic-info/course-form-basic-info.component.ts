@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
-import { CurrentCourseStoreService } from 'src/app/dashboard/services/store/current-course-store.service';
 
 @Component({
   selector: 'app-course-form-basic-info',
@@ -9,12 +8,10 @@ import { CurrentCourseStoreService } from 'src/app/dashboard/services/store/curr
   styleUrls: ['./course-form-basic-info.component.scss']
 })
 export class CourseFormBasicInfoComponent implements OnInit {
-  @Output() courseCreated = new EventEmitter<boolean>();
   basicInfoForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private coursesStoreService: CoursesStoreService,
-              private currentCourseStoreService: CurrentCourseStoreService) { }
+              private coursesStoreService: CoursesStoreService,) { }
 
   ngOnInit() {
     this.buildForm();
@@ -30,9 +27,7 @@ export class CourseFormBasicInfoComponent implements OnInit {
   createCourse() {
     const {title, desc} = this.basicInfoForm.value;
     const course = {title, desc};
-    const courseCreated = this.coursesStoreService.addCourse(course);
-    this.currentCourseStoreService.addOrUpdate(courseCreated);
-    this.courseCreated.emit(true);
+    this.coursesStoreService.addCourse(course);
   }
 
 }

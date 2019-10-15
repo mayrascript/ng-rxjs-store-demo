@@ -1,47 +1,47 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Selector } from 'src/app/core/services/store/selector';
+import { StoreService } from 'src/app/core/services/store/store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesStoreService {
+export class CoursesStoreService extends StoreService {
+  courses = [];
 
-  private readonly _courses = new BehaviorSubject<CourseModel[]>([]);
+  readonly storeName = 'courses';
 
-  readonly courses$ = this._courses.asObservable();
+  constructor(selector: Selector) {
+    super(selector);
+  }
 
   addCourse(course: CourseModel) {
-    // with automatically assigned ID ( don't do this at home, use uuid() )
-    const courseWithId = {...course, id: this.courses.length + 1, isPublished: false};
-    this.courses = [
-      ...this.courses,
-      courseWithId
-    ];
-    return courseWithId;
+   try {
+     // with automatically assigned ID ( don't do this at home, use uuid() )
+     const courseWithId = {...course, id: this.courses.length + 1, isPublished: false};
+     const courses = [
+           ...this.courses,
+           courseWithId
+         ];
+     this.add({courses});
+   } catch (e) {
+     console.log(e);
+   }
   }
 
   updateCourse(courseUpdated: CourseModel) {
     const filtered = this.courses.filter((c) => c.id !== courseUpdated.id);
     if (filtered.length !== this.courses.length) {
-      this.courses = [
+      const courses = [
         ...filtered,
         courseUpdated
       ];
+      this.update({courses});
     }
-
-    console.log(this.courses);
   }
 
-  removeCourse(id: number) {
-    this.courses = this.courses.filter(course => course.id !== id);
-  }
-
-  private get courses(): CourseModel[] {
-    return this._courses.getValue();
-  }
-
-  private set courses(val: CourseModel[]) {
-    this._courses.next(val);
+  courseState() {
+    return this.state();
   }
 }

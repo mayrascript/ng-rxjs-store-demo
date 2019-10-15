@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
-import { CurrentCourseStoreService } from 'src/app/dashboard/services/store/current-course-store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 
 @Component({
@@ -15,8 +14,7 @@ export class CourseFormPublishingInfoComponent implements OnInit {
   publishingInfo: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private coursesStoreService: CoursesStoreService,
-              private currentCourseStoreService: CurrentCourseStoreService) { }
+              private coursesStoreService: CoursesStoreService,) { }
 
   ngOnInit() {
     this.buildForm();
@@ -32,13 +30,11 @@ export class CourseFormPublishingInfoComponent implements OnInit {
   publicationDate({value: publicationDate}) {
     const currentCourse = {...this.currentCourse, publicationDate};
     this.coursesStoreService.updateCourse(currentCourse);
-    this.currentCourseStoreService.addOrUpdate(currentCourse);
   }
 
   publishCourse({checked: isPublished}) {
     const currentCourse = {...this.currentCourse, isPublished};
     this.coursesStoreService.updateCourse(currentCourse);
-    this.currentCourseStoreService.addOrUpdate(currentCourse);
   }
 
 }

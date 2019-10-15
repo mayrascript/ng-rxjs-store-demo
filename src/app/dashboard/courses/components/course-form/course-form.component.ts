@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { CurrentCourseStoreService } from 'src/app/dashboard/services/store/current-course-store.service';
+import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 
 @Component({
@@ -14,15 +13,18 @@ export class CourseFormComponent implements OnInit {
   currentCourse$: Observable<CourseModel>;
 
   constructor(
-    private currentCourseService: CurrentCourseStoreService
+    private coursesStoreService: CoursesStoreService
   ) {}
 
   ngOnInit() {
+    this.coursesStoreService.courseState().subscribe(
+      (res) => console.log('courseState', res),
+      (err) => console.log('err', err));
   }
 
   onCourseCreated(newCourse: boolean) {
     if (newCourse) {
-      this.currentCourse$ = this.currentCourseService.currentCourse$;
+      // TODO: get current course
     }
   }
 
