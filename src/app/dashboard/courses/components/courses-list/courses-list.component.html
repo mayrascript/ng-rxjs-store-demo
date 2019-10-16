@@ -1,5 +1,5 @@
 <div class="courses-list">
-  <mat-card *ngFor="let course of courses">
+  <mat-card *ngFor="let course of courses$ | async">
     <mat-card-title>
       {{course.title}}
     </mat-card-title>

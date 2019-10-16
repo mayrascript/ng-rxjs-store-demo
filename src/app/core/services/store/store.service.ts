@@ -1,49 +1,36 @@
 import { Injectable } from '@angular/core';
-import { actions } from 'src/app/core/services/store/actions';
-import { storeReducers } from 'src/app/core/services/store/reducers';
-import { Selector } from 'src/app/core/services/store/selector';
+import { Action } from 'src/app/core/services/store/reducers';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { scan } from 'rxjs/operators';
+
+class Dispatcher<T> extends Subject<T> {
+  dispatch(value: any): void {
+    this.next(value);
+  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class StoreService {
+export class StoreService<T> extends BehaviorSubject<T> {
 
-  private readonly store = storeReducers;
+  private dispatcher = new Dispatcher();
 
-  constructor(private selector: Selector) { }
+  constructor(private reducer,
+              initialState) {
+    super(initialState);
 
-  add(item: any) {
-    const store = this.store({}, {type: actions.add, payload: item});
-    this.updateStore(store);
-    return store;
+    // create an temp store in memory inside of observable
+    this.dispatcher.pipe(
+      scan((state, action) => this.reducer(state, action), initialState))
+      .subscribe(state => super.next(state));
   }
 
-  update(itemUpdated: any) {
-    const store = this.store({}, {type: actions.update, payload: itemUpdated});
-    this.updateStore(store);
-    return store;
+  dispatch(value: Action) {
+    this.dispatcher.dispatch(value);
   }
 
-  get(key: string) {
-    this.store({}, {type: actions.getItem});
-  }
-
-  remove(key: string) {
-    const store = this.store({}, {type: actions.remove, payload: key});
-    this.updateStore(store);
-  }
-
-  clear() {
-    const store = this.store({}, {type: actions.clear});
-    this.updateStore(store);
-  }
-
-  state() {
-    return this.selector.selector$;
-  }
-
-  private updateStore(store: any) {
-    console.log('updateStore', store);
-    this.selector.state = store;
+  next(value) {
+    this.dispatcher.dispatch(value);
   }
 }

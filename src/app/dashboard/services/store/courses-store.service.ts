@@ -1,47 +1,40 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { Selector } from 'src/app/core/services/store/selector';
-import { StoreService } from 'src/app/core/services/store/store.service';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
+import { StoreService } from 'src/app/core/services/store/store.service';
+import { actions } from 'src/app/core/services/store/actions';
+import { select } from 'src/app/core/services/store/operators';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/core/services/store/app-state';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesStoreService extends StoreService {
-  courses = [];
+export class CoursesStoreService {
 
-  readonly storeName = 'courses';
+  static count = 0;
 
-  constructor(selector: Selector) {
-    super(selector);
+  constructor(private storeService: StoreService<AppState>) {
+  }
+
+  getCourses(): Observable<CourseModel[]> {
+    return this.storeService.pipe(
+      select('courses'),
+      tap(console.log)
+    );
   }
 
   addCourse(course: CourseModel) {
-   try {
-     // with automatically assigned ID ( don't do this at home, use uuid() )
-     const courseWithId = {...course, id: this.courses.length + 1, isPublished: false};
-     const courses = [
-           ...this.courses,
-           courseWithId
-         ];
-     this.add({courses});
-   } catch (e) {
-     console.log(e);
-   }
+    CoursesStoreService.count += 1;
+    course = {...course, id: CoursesStoreService.count, isPublished: false};
+    this.storeService.dispatch({type: actions.add, payload: {course}});
   }
 
-  updateCourse(courseUpdated: CourseModel) {
-    const filtered = this.courses.filter((c) => c.id !== courseUpdated.id);
-    if (filtered.length !== this.courses.length) {
-      const courses = [
-        ...filtered,
-        courseUpdated
-      ];
-      this.update({courses});
-    }
+  updateCourse(course: CourseModel) {
+    this.storeService.dispatch({type: actions.update, payload: {course}});
   }
 
-  courseState() {
-    return this.state();
+  remove(courseId: string) {
+    this.storeService.dispatch({type: actions.remove, payload: {courseId}});
   }
 }

@@ -1,6 +1,6 @@
 export const actions = {
+  initialState: 'INITIAL_STATE',
   add: 'ADD',
-  getItem: 'GET_ITEM',
   remove: 'REMOVE',
   clear: 'CLEAR',
   update: 'UPDATE'

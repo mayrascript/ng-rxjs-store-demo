@@ -68,7 +68,7 @@ export class CourseFormTableOfContentComponent implements OnInit {
 
   private updateCourse() {
     const currentCourse = {...this.currentCourse, modules: this.modules};
-    this.courseStoreService.updateCourse(currentCourse);
+    // this.courseStoreService.updateCourse(currentCourse);
   }
 
 }

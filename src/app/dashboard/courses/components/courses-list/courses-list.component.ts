@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
+import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,26 +10,15 @@ import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
   styleUrls: ['./courses-list.component.scss']
 })
 export class CoursesListComponent implements OnInit {
-  courses: CourseModel[] = [
-    {
-      id: 1,
-      title: 'Curso Básico de Angular',
-      desc: 'de 0 a Experto',
-      modules: []
-    },
-    {
-      id: 2,
-      title: 'Curso Básico de Angular Parte II',
-      desc: 'Intermedio',
-      modules: []
-    }
-  ];
+  courses$: Observable<CourseModel[]>;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private coursesStoreService: CoursesStoreService
 ) { }
 
   ngOnInit() {
+    this.courses$ = this.coursesStoreService.getCourses();
   }
 
   showDetails(id: number) {

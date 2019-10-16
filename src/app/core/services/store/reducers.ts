@@ -1,4 +1,5 @@
 import { actions } from 'src/app/core/services/store/actions';
+import { AppState } from 'src/app/core/services/store/app-state';
 
 export interface Action {
   type: string;
@@ -9,29 +10,25 @@ export interface Reducer<T> {
   (state: T, action: Action): T;
 }
 
-export const storeReducers: Reducer<any> = (state: any = {}, action: Action) => {
+export const storeReducers: Reducer<AppState> = (state: any = {}, action: Action): AppState => {
   switch (action.type) {
     case actions.add:
-      console.log('ADD');
       return {
         ...state,
-        ...action.payload
+        courses: [...state.courses, action.payload.course]
       };
     case actions.update:
-      console.log('UPDATE');
+      const filtered = state.courses.filter((c) => c.id !== action.payload.course.id);
       return {
         ...state,
-        ...action.payload
+        courses: [...filtered, action.payload.course]
       };
-    case actions.getItem:
-      console.log('GET_ITEM');
-      return state[action.payload.key];
     case actions.remove:
-      console.log('REMOVE');
-      return {};
-    case actions.clear:
-      console.log('CLEAR');
-      return {};
+      const courses = state.courses.filter((c) => c.id !== action.payload.course.id);
+      return {
+        ...state,
+        courses
+      };
     default:
       return state;
   }

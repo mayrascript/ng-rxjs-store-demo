@@ -29,12 +29,12 @@ export class CourseFormPublishingInfoComponent implements OnInit {
 
   publicationDate({value: publicationDate}) {
     const currentCourse = {...this.currentCourse, publicationDate};
-    this.coursesStoreService.updateCourse(currentCourse);
+    // this.coursesStoreService.updateCourse(currentCourse);
   }
 
   publishCourse({checked: isPublished}) {
     const currentCourse = {...this.currentCourse, isPublished};
-    this.coursesStoreService.updateCourse(currentCourse);
+    // this.coursesStoreService.updateCourse(currentCourse);
   }
 
 }
