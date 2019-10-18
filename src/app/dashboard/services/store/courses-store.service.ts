@@ -18,10 +18,19 @@ export class CoursesStoreService {
   }
 
   getCourses(): Observable<CourseModel[]> {
-    return this.storeService.pipe(
-      select('courses'),
-      tap(console.log)
-    );
+    return this.storeService
+      .pipe(
+        select('courses'),
+        tap(console.log)
+      );
+  }
+
+  getCurrentCourse(): Observable<CourseModel> {
+    return this.storeService
+      .pipe(
+        select('currentCourse'),
+        tap((currentCourse) => console.log('currentCourse', currentCourse))
+      );
   }
 
   addCourse(course: CourseModel) {

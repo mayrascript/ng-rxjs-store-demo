@@ -15,13 +15,15 @@ export const storeReducers: Reducer<AppState> = (state: any = {}, action: Action
     case actions.add:
       return {
         ...state,
-        courses: [...state.courses, action.payload.course]
+        courses: [...state.courses, action.payload.course],
+        currentCourse: {...action.payload.course}
       };
     case actions.update:
       const filtered = state.courses.filter((c) => c.id !== action.payload.course.id);
       return {
         ...state,
-        courses: [...filtered, action.payload.course]
+        courses: [...filtered, action.payload.course],
+        currentCourse: {...action.payload.course}
       };
     case actions.remove:
       const courses = state.courses.filter((c) => c.id !== action.payload.course.id);

@@ -3,5 +3,5 @@ export const actions = {
   add: 'ADD',
   remove: 'REMOVE',
   clear: 'CLEAR',
-  update: 'UPDATE'
+  update: 'UPDATE',
 };
