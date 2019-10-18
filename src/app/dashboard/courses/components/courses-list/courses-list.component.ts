@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseModel } from 'src/app/dashboard/shared/models/course.model';
 import { CoursesStoreService } from 'src/app/dashboard/services/store/courses-store.service';
@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss']
+  styleUrls: ['./courses-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesListComponent implements OnInit {
   courses$: Observable<CourseModel[]>;
