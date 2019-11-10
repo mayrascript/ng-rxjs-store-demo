@@ -1,0 +1,30 @@
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import url('https://fonts.googleapis.com/css?family=Questrial|Raleway');
+@import '~@angular/material/theming';
+
+$app-primary: mat-palette($mat-pink);
+$app-secondary: mat-palette($mat-grey);
+$app-accent:  mat-palette($mat-light-blue);
+$app-warn:    mat-palette($mat-red);
+
+$primary: mat-color($app-primary);
+$secondary: mat-color($app-secondary);
+$accent: mat-color($app-accent);
+$warn: mat-color($app-warn);
+$white: #FFFFFF;
+$grey: #bfbfbf;
+$light-grey: #a2a0a0;
+$dark-blue: #0d4a68;
+$dark-grey: #8c8c8c;
+
+
+// Fonts
+$font-primary: 'Questrial', sans-serif;
+$font-secondary: 'Raleway', sans-serif;
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Questrial, Raleway, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+@include mat-core($custom-typography);

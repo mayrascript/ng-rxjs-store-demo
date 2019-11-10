@@ -1,0 +1,12 @@
+<form [formGroup]="basicInfoForm">
+  <mat-form-field>
+    <input matInput placeholder="Course Title" formControlName="title" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Course Description" formControlName="desc">
+  </mat-form-field>
+  <div>
+    <button mat-button matStepperNext (click)="createCourse()">Next</button>
+  </div>
+</form>
