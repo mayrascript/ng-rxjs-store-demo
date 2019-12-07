@@ -10,10 +10,6 @@ export const menuPageList = [
         title: 'Create',
         path: 'courses/create'
       },
-      {
-        title: 'List',
-        path: 'courses/courses-list'
-      },
     ],
   },
 ];
