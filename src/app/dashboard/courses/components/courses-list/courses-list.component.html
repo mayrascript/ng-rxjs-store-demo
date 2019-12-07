@@ -5,6 +5,19 @@
     </mat-card-title>
     <mat-card-content>
       {{course.desc}}
+
+      <div>
+        Fecha de Publicación {{course?.publicationDate | date:'short'}}
+      </div>
+
+      <div *ngFor="let m of course.modules">
+        <p> {{m.title}}</p>
+        <p> {{m.desc}} </p>
+
+        <div *ngFor="let theme of m.themes">
+          <p>{{theme.title}}</p>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-footer>
       <button (click)="showDetails(course.id)" mat-icon-button aria-label="Example icon-button with a heart icon">
