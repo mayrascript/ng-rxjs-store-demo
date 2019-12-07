@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "src/rxjs-store-demo",
+    "public": "dist/rxjs-store-demo",
     "ignore": [
       "firebase.json",
       "**/.*",
